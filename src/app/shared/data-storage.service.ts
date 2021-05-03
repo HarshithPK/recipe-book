@@ -15,12 +15,12 @@ export class DataStorageService {
     ) {}
 
     storeRecipes() {
+        const url =
+            'https://ng-recipe-book-6b6e4-default-rtdb.asia-southeast1.firebasedatabase.app/recipes.json';
+
         const recipes = this.recipeService.getRecipes();
         this.http
-            .put(
-                'https://ng-recipe-book-6b6e4-default-rtdb.asia-southeast1.firebasedatabase.app/recipes.json',
-                recipes
-            )
+            .put(url, recipes)
             // tslint:disable-next-line: deprecation
             .subscribe((response) => {
                 console.log(response);
@@ -28,24 +28,23 @@ export class DataStorageService {
     }
 
     fetchRecipes() {
-        return this.http
-            .get<Recipe[]>(
-                'https://ng-recipe-book-6b6e4-default-rtdb.asia-southeast1.firebasedatabase.app/recipes.json'
-            )
-            .pipe(
-                map((recipes) => {
-                    return recipes.map((recipe) => {
-                        return {
-                            ...recipe,
-                            ingredients: recipe.ingredients
-                                ? recipe.ingredients
-                                : [],
-                        };
-                    });
-                }),
-                tap((recipes) => {
-                    this.recipeService.setRecipes(recipes);
-                })
-            );
+        const url =
+            'https://ng-recipe-book-6b6e4-default-rtdb.asia-southeast1.firebasedatabase.app/recipes.json';
+
+        return this.http.get<Recipe[]>(url).pipe(
+            map((recipes) => {
+                return recipes.map((recipe) => {
+                    return {
+                        ...recipe,
+                        ingredients: recipe.ingredients
+                            ? recipe.ingredients
+                            : [],
+                    };
+                });
+            }),
+            tap((recipes) => {
+                this.recipeService.setRecipes(recipes);
+            })
+        );
     }
 }

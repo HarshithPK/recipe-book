@@ -5,6 +5,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { throwError, BehaviorSubject } from 'rxjs';
 
 import { User } from './user.model';
+import { environment } from 'src/environments/environment';
 
 export interface AuthResponseData {
     kind: string;
@@ -24,15 +25,16 @@ export class AuthService {
     constructor(private http: HttpClient, private router: Router) {}
 
     signup(email: string, password: string) {
+        const url =
+            'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' +
+            environment.firebaseAPIKey;
+
         return this.http
-            .post<AuthResponseData>(
-                'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBop4Nfu4ea9A8hoxB-DvhgaDOOityoRy0',
-                {
-                    email: email,
-                    password: password,
-                    returnSecureToken: true,
-                }
-            )
+            .post<AuthResponseData>(url, {
+                email: email,
+                password: password,
+                returnSecureToken: true,
+            })
             .pipe(
                 catchError(this.handleError),
                 tap((resData) => {
@@ -47,15 +49,16 @@ export class AuthService {
     }
 
     login(email: string, password: string) {
+        const url =
+            'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' +
+            environment.firebaseAPIKey;
+
         return this.http
-            .post<AuthResponseData>(
-                'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBop4Nfu4ea9A8hoxB-DvhgaDOOityoRy0',
-                {
-                    email: email,
-                    password: password,
-                    returnSecureToken: true,
-                }
-            )
+            .post<AuthResponseData>(url, {
+                email: email,
+                password: password,
+                returnSecureToken: true,
+            })
             .pipe(
                 catchError(this.handleError),
                 tap((resData) => {
