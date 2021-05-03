@@ -52,6 +52,7 @@ export class AuthComponent implements OnDestroy {
             authObs = this.authService.signup(email, password);
         }
 
+        // tslint:disable-next-line: deprecation
         authObs.subscribe(
             (resData) => {
                 console.log(resData);
