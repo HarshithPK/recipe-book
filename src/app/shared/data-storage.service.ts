@@ -21,6 +21,7 @@ export class DataStorageService {
                 'https://ng-recipe-book-6b6e4-default-rtdb.asia-southeast1.firebasedatabase.app/recipes.json',
                 recipes
             )
+            // tslint:disable-next-line: deprecation
             .subscribe((response) => {
                 console.log(response);
             });

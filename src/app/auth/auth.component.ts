@@ -55,12 +55,10 @@ export class AuthComponent implements OnDestroy {
         // tslint:disable-next-line: deprecation
         authObs.subscribe(
             (resData) => {
-                console.log(resData);
                 this.isLoading = false;
                 this.router.navigate(['/recipes']);
             },
             (errorMessage) => {
-                console.log(errorMessage);
                 this.error = errorMessage;
                 this.showErrorAlert(errorMessage);
                 this.isLoading = false;

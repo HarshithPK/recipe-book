@@ -18,10 +18,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit() {
+        // tslint:disable-next-line: deprecation
         this.userSub = this.authService.user.subscribe((user) => {
             this.isAuthenticated = !!user;
-            console.log(!user);
-            console.log(!!user);
         });
     }
 
@@ -30,6 +29,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
 
     onFetchData() {
+        // tslint:disable-next-line: deprecation
         this.dataStorageService.fetchRecipes().subscribe();
     }
 

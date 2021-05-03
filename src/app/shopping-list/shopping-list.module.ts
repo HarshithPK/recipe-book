@@ -10,9 +10,7 @@ import { SharedModule } from '../shared/shared.module';
     declarations: [ShoppingListComponent, ShoppingEditComponent],
     imports: [
         FormsModule,
-        RouterModule.forChild([
-            { path: 'shopping-list', component: ShoppingListComponent },
-        ]),
+        RouterModule.forChild([{ path: '', component: ShoppingListComponent }]),
         SharedModule,
     ],
 })

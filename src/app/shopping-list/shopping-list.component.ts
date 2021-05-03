@@ -17,6 +17,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.ingredients = this.slService.getIngredients();
+
         // tslint:disable-next-line: deprecation
         this.subscription = this.slService.ingredientsChanged.subscribe(
             (ingredients: Ingredient[]) => {
